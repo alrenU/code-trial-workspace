@@ -1,4 +1,4 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import QrCode from "qrcode";
 import JsZip from "jszip";
 import FileSaver from "file-saver";
@@ -20,6 +20,33 @@ function QrCodeHorizontal(props) {
   //   })
   // }
 
+  useEffect(() => {
+    if (isOpenState) {
+      qrCodePositionDemo();
+    }
+  }, [isOpenState]);
+
+  const qrCodePositionDemo = () => {
+    let canvas = document.getElementById("qr-code-horizontal");
+    let ctx = canvas.getContext("2d");
+    let qrImage = new Image();
+
+    ctx.beginPath();
+    ctx.rect(0, 0, 540, 180);
+    ctx.fillStyle = "white";
+
+    ctx.fill();
+    ctx.closePath();
+
+    QrCode.toDataURL("https://kartelam.com/").then((data) => {
+      qrImage.src = data;
+
+      qrImage.onload = () => {
+        ctx.drawImage(qrImage, 10, 10, 160, 160);
+      }
+    })
+  }
+
   const downloadQrCodes = () => {
     products.map((value, index) => {
       value.urlLastPart.map((value2, index2) => {
@@ -39,18 +66,18 @@ function QrCodeHorizontal(props) {
     ctx.fill();
     ctx.closePath();
 
-    // QrCode.toDataURL(urlBeginningPart + urlMiddlePart + urlLastPart).then((data) => {
-    //   ctx.drawImage(data.split(',')[1], 10, 10, 160, 160);
-    // })
+    QrCode.toDataURL(urlBeginningPart + urlMiddlePart + urlLastPart).then((data) => {
+      let qrImage = new Image();
+      qrImage.src = data;
+
+      // console.log(qrImage);
+      qrImage.onload = () => {
+        ctx.drawImage(qrImage, 10, 10, 160, 160);
+      }
+    })
 
     // ctx.stroke();
   };
-
-  // useEffect(() => {
-  //   if (isOpenState) {
-  //     writePropertiesToCanvas();
-  //   }
-  // }, [isOpenState]);
 
   return (
     <>
