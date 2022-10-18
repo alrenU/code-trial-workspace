@@ -3,6 +3,18 @@ import { jsPDF } from "jspdf";
 
 const doc = new jsPDF({ orientation: "p", unit: "mm", format: [200.0, 200.0] });
 
+function SecondFunction() {
+  return (
+    <>
+      <div style={{backgroundColor: "gray", height: "350px"}}>
+        <form>
+          <button>Click Me 2</button>
+        </form>
+      </div>
+    </>
+  );
+}
+
 function PdfGeneration() {
   const submitHandler = (event) => {
     QrCode.toDataURL("https://artskydj.github.io/jsPDF/docs/jsPDF.html").then((data) => {
@@ -29,3 +41,4 @@ function PdfGeneration() {
 }
 
 export default PdfGeneration;
+export {SecondFunction};
