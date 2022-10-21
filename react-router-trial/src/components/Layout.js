@@ -7,7 +7,7 @@ function Layout() {
       <nav>
         <ul>
           <li>
-            <Link to="/qr-code-horizontal">{<ButtonComponent />}</Link>
+            <Link to="/qr-code-horizontal" target="_blank">{<ButtonComponent />}</Link>
           </li>
           <li>
             <Link to="/qr-code-horizontal">QR Code Horzontal</Link>
