@@ -1,10 +1,21 @@
-const SortAlgorithm = () => {
+import React from "react";
+import { useWorker } from "@koale/useworker";
+
+const containerFunction = () => {
+    const numbers = [...Array(5000000)].map(e => ~~(Math.random() * 1000000));
     const sortNumbers = nums => nums.sort();
 
-    const generateNumbers = () => {
-        const numbers = [...Array(5000000)].map(e => ~~(Math.random() * 1000000));
-        sortNumbers(numbers);
-    }
+    sortNumbers(numbers);
+    console.log("Inside containerFunction.");
+}
+
+const SortAlgorithm = () => {
+    const [sortWorker] = useWorker(containerFunction);
+
+    const generateNumbers = async () => {
+      const result = await sortWorker();
+      console.log(result);
+    };
 
     return (
         <>
