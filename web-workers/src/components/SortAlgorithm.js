@@ -5,8 +5,7 @@ const containerFunction = () => {
     const numbers = [...Array(5000000)].map(e => ~~(Math.random() * 1000000));
     const sortNumbers = nums => nums.sort();
 
-    sortNumbers(numbers);
-    console.log("Inside containerFunction.");
+    return sortNumbers(numbers);
 }
 
 const SortAlgorithm = () => {
